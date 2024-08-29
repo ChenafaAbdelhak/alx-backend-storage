@@ -7,10 +7,10 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
-    """decorator that counts the number of times a method is called."""    
+    """decorator that counts the number of times a method is called."""
     @wraps(method)
     def wrapper(self, *args, **kwargs) -> Union[str, bytes, int, float]:
-        """Wrapper function that increments the count and calls the original method."""
+        """Wrapper function that increments the count"""
         self._redis.incr(method.__qualname__)
         return method(self, *args, **kwargs)
     return wrapper
