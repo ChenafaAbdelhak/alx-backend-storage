@@ -28,13 +28,9 @@ class Cache:
     def get_str(self, key: str) -> str:
         """Retrieves a string value from a Redis data storage."""
         data = self._redis.get(key)
-        if data is not None:
-            return data.decode("utf-8")
-        return None
+        return self.get(key, lambda d: d.decode('utf-8'))
 
     def get_int(self, key: str) -> int:
         """Retrieves an integer value from a Redis data storage."""
         data = self._redis.get(key)
-        if data is not None:
-            return int(data)
-        return None
+        return self.get(key, lambda d: int(d))
