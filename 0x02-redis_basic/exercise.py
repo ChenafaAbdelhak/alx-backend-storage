@@ -2,7 +2,7 @@
 """module for cache class"""
 import uuid
 import redis
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 
 
 class Cache:
@@ -25,10 +25,10 @@ class Cache:
         value = self._redis.get(key)
         return fn(value) if fn is not None else value
 
-    def get_str(self, key: str) -> str:
+    def get_str(self, key: str) -> Optional(str):
         """Retrieves a string value from a Redis data storage."""
         return self.get(key, lambda d: d.decode('utf-8'))
 
-    def get_int(self, key: str) -> int:
+    def get_int(self, key: str) -> Optional(int):
         """Retrieves an integer value from a Redis data storage."""
         return self.get(key, lambda d: int(d))
