@@ -18,3 +18,4 @@ class Cache:
         data_key = uuid.uuid4()
         self._redis.set(data_key, data)
         return data_key
+    
